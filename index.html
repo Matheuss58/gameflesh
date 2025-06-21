@@ -6,14 +6,17 @@
     <title>Life Gamification</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1f1f1f">
 </head>
 <body>
     <div class="container">
         <div class="section">
-            <h2>✅ Tarefas de Hoje</h2>
+            <h2 id="section-title">✅ Tarefas de Hoje</h2>
             <div id="tasks-list" class="list">
-                <!-- Tarefas serão adicionadas dinamicamente -->
+                <!-- Conteúdo dinâmico -->
             </div>
+            <button id="reset-tasks-btn" class="reset-btn">🔄 Resetar Tarefas</button>
         </div>
 
         <div class="xp-display">
@@ -29,17 +32,12 @@
         </div>
 
         <div class="nav">
-            <button class="nav-btn active" id="home-btn"><i class="fas fa-home"></i> Home</button>
+            <button class="nav-btn active" id="home-btn"><i class="fas fa-home"></i> Tarefas</button>
             <button class="nav-btn" id="rewards-btn"><i class="fas fa-gift"></i> Recompensas</button>
             <button class="nav-btn" id="level-btn"><i class="fas fa-level-up-alt"></i> Nível</button>
         </div>
 
-        <div class="notification" id="notification">
-            <div class="notification-content">
-                <i class="fas fa-check-circle notification-icon"></i>
-                <span class="notification-text"></span>
-            </div>
-        </div>
+        <div class="notification" id="notification"></div>
 
         <!-- Modal de Histórico -->
         <div id="history-modal" class="modal">
@@ -49,13 +47,41 @@
                 <div id="history-list" class="history-list"></div>
             </div>
         </div>
+
+        <!-- Modal de Recompensas -->
+        <div id="reward-modal" class="modal">
+            <div class="modal-content reward-modal-content">
+                <span class="close-reward-modal">&times;</span>
+                <h2>🎰 Você ganhou recompensas!</h2>
+                <div id="reward-slots" class="reward-slots">
+                    <div class="reward-slot">
+                        <div class="reward-icon">?</div>
+                        <div id="reward-1" class="reward-name"></div>
+                    </div>
+                    <div class="reward-slot">
+                        <div class="reward-icon">?</div>
+                        <div id="reward-2" class="reward-name"></div>
+                    </div>
+                </div>
+                <button id="claim-rewards-btn" class="claim-btn">Pegar Recompensas</button>
+            </div>
+        </div>
     </div>
 
     <audio id="complete-sound" src="sounds/complete.mp3"></audio>
     <audio id="reward-sound" src="sounds/reward.mp3"></audio>
     <audio id="level-up-sound" src="sounds/level-up.mp3"></audio>
+    <audio id="slot-sound" src="sounds/slot.mp3"></audio>
 
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js', { scope: './' })
+                    .then(reg => console.log('✅ Service Worker registrado:', reg.scope))
+                    .catch(err => console.log('❌ Service Worker falhou:', err));
+            });
+        }
+    </script>
 </body>
-</html>
 </html>

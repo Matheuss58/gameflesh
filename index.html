@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Gamification</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>✅ Tarefas de Hoje</h2>
+            <div id="tasks-list" class="list">
+                <!-- Tarefas serão adicionadas dinamicamente -->
+            </div>
+        </div>
+
+        <div class="xp-display">
+            <span>XP: <span id="current-xp">0</span>/<span id="max-xp">500</span></span>
+            <span class="streak">🔥 Streak: <span id="streak-days">0</span> dias</span>
+        </div>
+        <div class="xp-bar">
+            <div id="xp-progress" class="xp-progress"></div>
+        </div>
+        <div class="level-display">
+            <span>Nível: <span id="current-level">1</span></span>
+            <span class="history-btn" id="history-btn"><i class="fas fa-history"></i> Histórico</span>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn active" id="home-btn"><i class="fas fa-home"></i> Home</button>
+            <button class="nav-btn" id="rewards-btn"><i class="fas fa-gift"></i> Recompensas</button>
+            <button class="nav-btn" id="level-btn"><i class="fas fa-level-up-alt"></i> Nível</button>
+        </div>
+
+        <div class="notification" id="notification">
+            <div class="notification-content">
+                <i class="fas fa-check-circle notification-icon"></i>
+                <span class="notification-text"></span>
+            </div>
+        </div>
+
+        <!-- Modal de Histórico -->
+        <div id="history-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>📅 Histórico de Pontos</h2>
+                <div id="history-list" class="history-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="complete-sound" src="sounds/complete.mp3"></audio>
+    <audio id="reward-sound" src="sounds/reward.mp3"></audio>
+    <audio id="level-up-sound" src="sounds/level-up.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
+</html>

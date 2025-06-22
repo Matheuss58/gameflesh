@@ -40,46 +40,155 @@ document.addEventListener('DOMContentLoaded', function() {
     const achievementsDB = {
         skins: [
             { id: "default", name: "Pele Básica", level: 1, color: "#f5d0b9" },
-            { id: "light", name: "Pele Clara", level: 5, color: "#e8c1a0" },
-            { id: "medium", name: "Pele Média", level: 10, color: "#d2a679" },
-            { id: "dark", name: "Pele Escura", level: 15, color: "#8d5524" },
+            { id: "light", name: "Pele Clara", level: 1, color: "#e8c1a0" },
+            { id: "tan", name: "Pele Bronzeada", level: 1, color: "#d2a679" },
+            { id: "medium", name: "Pele Média", level: 5, color: "#b88b61" },
+            { id: "olive", name: "Pele Oliva", level: 5, color: "#b5a27a" },
+            { id: "dark", name: "Pele Escura", level: 10, color: "#8d5524" },
+            { id: "deep", name: "Pele Profunda", level: 15, color: "#5a3825" },
+            { id: "pale", name: "Pele Pálida", level: 1, color: "#ffe0bd" },
             { id: "green", name: "Pele Verde", level: 20, color: "#a8d8a8" },
             { id: "blue", name: "Pele Azul", level: 25, color: "#a8c8d8" },
+            { id: "red", name: "Pele Vermelha", level: 30, color: "#d8a8a8" },
+            { id: "purple", name: "Pele Roxa", level: 35, color: "#c8a8d8" },
             { id: "gold", name: "Pele Dourada", level: 50, color: "#ffd700" },
             { id: "silver", name: "Pele Prateada", level: 75, color: "#c0c0c0" },
             { id: "rainbow", name: "Pele Arco-íris", level: 100, color: "linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)" },
-            { id: "galaxy", name: "Pele Galáxia", level: 150, color: "linear-gradient(45deg, #000428, #004e92, #000428)" }
+            { id: "galaxy", name: "Pele Galáxia", level: 150, color: "linear-gradient(45deg, #000428, #004e92, #000428)" },
+            { id: "marble", name: "Pele Mármore", level: 200, color: "linear-gradient(45deg, #e0e0e0, #c0c0c0, #e0e0e0)" },
+            { id: "diamond", name: "Pele Diamante", level: 250, color: "linear-gradient(45deg, #b9f2ff, #ffffff, #b9f2ff)" }
         ],
         hats: [
-            { id: "none", name: "Sem Chapéu", level: 1, style: "none" },
-            { id: "cap", name: "Boné", level: 5, style: "background-color: #5e72e4; height: 15px; border-radius: 10px 10px 0 0;" },
-            { id: "tophat", name: "Cartola", level: 10, style: "background-color: #2d3748; width: 70%; height: 25px; border-radius: 5px 5px 0 0;" },
-            { id: "cowboy", name: "Chapéu de Cowboy", level: 15, style: "background-color: #a0522d; width: 90%; height: 10px; border-radius: 50%; border-bottom: 15px solid #a0522d;" },
-            { id: "party", name: "Chapéu de Festa", level: 20, style: "background-color: #ff6b6b; width: 80%; height: 10px; border-radius: 50%;" },
-            { id: "crown", name: "Coroa", level: 30, style: "background-color: gold; width: 70%; height: 15px; clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);" },
-            { id: "wizard", name: "Chapéu de Mago", level: 50, style: "background-color: #9f7aea; width: 60%; height: 30px; clip-path: polygon(0% 0%, 100% 0%, 50% 100%);" },
-            { id: "halo", name: "Auréola", level: 100, style: "background-color: gold; width: 80%; height: 5px; border-radius: 50%; box-shadow: 0 0 10px gold;" }
+            { 
+                id: "none", 
+                name: "Sem Chapéu", 
+                level: 1, 
+                style: "display: none;" 
+            },
+            { 
+                id: "baseball", 
+                name: "Boné de Baseball", 
+                level: 5, 
+                style: "width: 80%; height: 15px; background: #5e72e4; border-radius: 15px 15px 0 0; border-bottom: 5px solid #4a5bd6; &::after { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 60%; height: 10px; background: #5e72e4; border-radius: 0 0 10px 10px; }" 
+            },
+            { 
+                id: "tophat", 
+                name: "Cartola", 
+                level: 10, 
+                style: "width: 60%; height: 25px; background: #2d3748; border-radius: 5px 5px 0 0; &::before { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80%; height: 10px; background: #2d3748; border-radius: 0 0 5px 5px; }" 
+            },
+            { 
+                id: "cowboy", 
+                name: "Chapéu de Cowboy", 
+                level: 15, 
+                style: "width: 100%; height: 10px; background: #a0522d; border-radius: 50%; &::before { content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 120%; height: 15px; background: #a0522d; border-radius: 50%; }" 
+            },
+            { 
+                id: "beanie", 
+                name: "Gorro de Inverno", 
+                level: 20, 
+                style: "width: 80%; height: 30px; background: #f56565; border-radius: 50% 50% 0 0; clip-path: ellipse(50% 60% at 50% 40%); &::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 60%; height: 15px; background: #f56565; border-radius: 0 0 10px 10px; }" 
+            },
+            { 
+                id: "crown", 
+                name: "Coroa Real", 
+                level: 30, 
+                style: "width: 70%; height: 20px; background: gold; clip-path: polygon(0% 0%, 10% 60%, 30% 100%, 50% 80%, 70% 100%, 90% 60%, 100% 0%); box-shadow: 0 0 10px gold;" 
+            },
+            { 
+                id: "wizard", 
+                name: "Chapéu de Mago", 
+                level: 50, 
+                style: "width: 60%; height: 40px; background: #9f7aea; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); &::before { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 80%; height: 10px; background: #9f7aea; border-radius: 5px; }" 
+            },
+            { 
+                id: "halo", 
+                name: "Auréola", 
+                level: 100, 
+                style: "width: 80%; height: 5px; background: gold; border-radius: 50%; box-shadow: 0 0 15px gold;" 
+            },
+            { 
+                id: "pirate", 
+                name: "Chapéu de Pirata", 
+                level: 25, 
+                style: "width: 80%; height: 15px; background: #2d3748; border-radius: 10px 10px 0 0; &::before { content: ''; position: absolute; top: 15px; left: 30%; width: 40%; height: 20px; background: #2d3748; clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%); }" 
+            },
+            { 
+                id: "chef", 
+                name: "Chapéu de Chef", 
+                level: 35, 
+                style: "width: 80%; height: 25px; background: white; border-radius: 5px; &::before { content: ''; position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 60%; height: 15px; background: white; border-radius: 0 0 10px 10px; }" 
+            },
+            { 
+                id: "viking", 
+                name: "Chapéu Viking", 
+                level: 40, 
+                style: "width: 80%; height: 20px; background: #a0522d; border-radius: 10px; &::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 100%; height: 15px; background: #a0522d; clip-path: polygon(0% 0%, 25% 100%, 75% 100%, 100% 0%); }" 
+            },
+            { 
+                id: "santa", 
+                name: "Chapéu de Natal", 
+                level: 45, 
+                style: "width: 70%; height: 30px; background: #f56565; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); &::before { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 100%; height: 15px; background: white; border-radius: 5px; }" 
+            },
+            { 
+                id: "grad", 
+                name: "Chapéu de Formatura", 
+                level: 60, 
+                style: "width: 80%; height: 10px; background: #2d3748; border-radius: 5px; &::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100%; height: 5px; background: #5e72e4; }" 
+            },
+            { 
+                id: "witch", 
+                name: "Chapéu de Bruxa", 
+                level: 75, 
+                style: "width: 60%; height: 50px; background: #2d3748; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); border-radius: 5px 5px 0 0;" 
+            },
+            { 
+                id: "afro", 
+                name: "Afro", 
+                level: 20, 
+                style: "width: 100%; height: 40px; background: #000; border-radius: 50%; box-shadow: 0 0 0 5px #333;" 
+            }
         ],
         eyes: [
             { id: "black", name: "Olhos Pretos", level: 1, color: "#000000" },
             { id: "blue", name: "Olhos Azuis", level: 5, color: "#5e72e4" },
             { id: "green", name: "Olhos Verdes", level: 10, color: "#48bb78" },
-            { id: "red", name: "Olhos Vermelhos", level: 15, color: "#f56565" },
-            { id: "gold", name: "Olhos Dourados", level: 20, color: "#ffd700" },
-            { id: "glow", name: "Olhos Brilhantes", level: 30, color: "#ffffff", style: "box-shadow: 0 0 10px #ffffff;" },
+            { id: "brown", name: "Olhos Castanhos", level: 1, color: "#8d5524" },
+            { id: "hazel", name: "Olhos Avelã", level: 5, color: "#b5a642" },
+            { id: "gray", name: "Olhos Cinza", level: 10, color: "#a8a8a8" },
+            { id: "amber", name: "Olhos Âmbar", level: 15, color: "#ffbf00" },
+            { id: "red", name: "Olhos Vermelhos", level: 20, color: "#f56565" },
+            { id: "gold", name: "Olhos Dourados", level: 25, color: "#ffd700" },
+            { id: "silver", name: "Olhos Prateados", level: 30, color: "#c0c0c0" },
+            { id: "glow", name: "Olhos Brilhantes", level: 35, color: "#ffffff", style: "box-shadow: 0 0 10px #ffffff;" },
             { id: "rainbow", name: "Olhos Arco-íris", level: 50, color: "linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet)" },
-            { id: "hearts", name: "Olhos de Coração", level: 75, color: "#ff6b6b", style: "clip-path: circle(50% at 50% 50%);" }
+            { id: "hearts", name: "Olhos de Coração", level: 75, color: "#ff6b6b", style: "clip-path: circle(50% at 50% 50%);" },
+            { id: "stars", name: "Olhos de Estrela", level: 100, color: "#ffd700", style: "clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);" },
+            { id: "cat", name: "Olhos de Gato", level: 40, color: "#5e72e4", style: "clip-path: ellipse(25% 40% at 50% 50%);" },
+            { id: "snake", name: "Olhos de Serpente", level: 60, color: "#48bb78", style: "clip-path: ellipse(15% 50% at 50% 50%);" },
+            { id: "robot", name: "Olhos de Robô", level: 80, color: "#a8a8a8", style: "border-radius: 0; box-shadow: 0 0 0 2px #333;" },
+            { id: "alien", name: "Olhos Alienígenas", level: 120, color: "#48bb78", style: "clip-path: ellipse(40% 20% at 50% 50%);" }
         ],
         backgrounds: [
             { id: "default", name: "Padrão", level: 1, style: "background-color: #f8f9fa;" },
             { id: "nature", name: "Natureza", level: 5, image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
             { id: "beach", name: "Praia", level: 10, image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "forest", name: "Floresta", level: 15, image: "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
             { id: "space", name: "Espaço", level: 20, image: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-            { id: "city", name: "Cidade", level: 30, image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-            { id: "mountain", name: "Montanhas", level: 50, image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-            { id: "castle", name: "Castelo", level: 75, image: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-            { id: "galaxy", name: "Galáxia", level: 100, image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
-            { id: "golden", name: "Dourado", level: 150, image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" }
+            { id: "city", name: "Cidade", level: 25, image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "mountain", name: "Montanhas", level: 30, image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "desert", name: "Deserto", level: 35, image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "waterfall", name: "Cachoeira", level: 40, image: "https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "castle", name: "Castelo", level: 45, image: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "underwater", name: "Subaquático", level: 50, image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "galaxy", name: "Galáxia", level: 60, image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "golden", name: "Dourado", level: 70, image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "neon", name: "Neon", level: 80, image: "https://images.unsplash.com/photo-1517994112540-009c47ea476b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "abstract", name: "Abstrato", level: 90, image: "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "fantasy", name: "Fantasia", level: 100, image: "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "cyberpunk", name: "Cyberpunk", level: 120, image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" },
+            { id: "medieval", name: "Medieval", level: 150, image: "https://images.unsplash.com/photo-1513628253939-010e64ac66cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" }
         ],
         titles: [
             { id: "novice", name: "Novato", level: 1 },
@@ -255,8 +364,13 @@ document.addEventListener('DOMContentLoaded', function() {
             hatItem.dataset.id = hat.id;
             hatItem.dataset.type = "hat";
             
+            // Criar um elemento para visualização do chapéu
+            const hatPreview = document.createElement('div');
+            hatPreview.className = 'hat-preview';
+            hatPreview.style.cssText = hat.style.replace(/&::before/g, '').replace(/&::after/g, '');
+            
             hatItem.innerHTML = `
-                <div class="hat-preview" style="${hat.style || 'background-color: #ccc'}"></div>
+                <div class="hat-preview" style="${hat.style.replace(/&::before/g, '').replace(/&::after/g, '')}"></div>
                 <div class="item-name">${hat.name}</div>
                 ${!isUnlocked ? `<div class="item-level">Nível ${hat.level}</div>` : ''}
             `;
@@ -397,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Desbloquear todas as skins
         profileData.unlockedSkins = achievementsDB.skins.map(skin => skin.id);
-        profileData.currentSkin = "galaxy";
+        profileData.currentSkin = "diamond";
         
         // Desbloquear todos os chapéus
         profileData.unlockedHats = achievementsDB.hats.map(hat => hat.id);
@@ -405,11 +519,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Desbloquear todos os olhos
         profileData.unlockedEyes = achievementsDB.eyes.map(eye => eye.id);
-        profileData.currentEyes = "rainbow";
+        profileData.currentEyes = "alien";
         
         // Desbloquear todos os fundos
         profileData.unlockedBackgrounds = achievementsDB.backgrounds.map(bg => bg.id);
-        profileData.currentBackground = "galaxy";
+        profileData.currentBackground = "cyberpunk";
         
         // Desbloquear todos os títulos
         profileData.achievements = achievementsDB.titles.map(title => title.id);
@@ -480,17 +594,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-profileHomeBtn.addEventListener('click', () => {
-    window.location.href = "index.html";
-});
+    profileHomeBtn.addEventListener('click', () => {
+        window.location.href = "index.html";
+    });
 
-profileRewardsBtn.addEventListener('click', () => {
-    window.location.href = "index.html#rewards";
-});
+    profileRewardsBtn.addEventListener('click', () => {
+        window.location.href = "index.html#rewards";
+    });
 
-profileProfileBtn.addEventListener('click', () => {
-    // Já está na página de perfil
-});
+    profileProfileBtn.addEventListener('click', () => {
+        // Já está na página de perfil
+    });
 
     unlockAllBtn.addEventListener('click', unlockAllItems);
     resetAllBtn.addEventListener('click', resetAllItems);

@@ -17,6 +17,7 @@
                 <!-- Conteúdo dinâmico -->
             </div>
             <button id="reset-tasks-btn" class="reset-btn">🔄 Resetar Tarefas</button>
+            <button id="reset-level-btn" class="reset-level-btn">↩️ Resetar Nível</button>
         </div>
 
         <div class="xp-display">
@@ -27,13 +28,14 @@
             <div id="xp-progress" class="xp-progress"></div>
         </div>
         <div class="level-display">
-            <span>Nível: <span id="current-level">1</span></span>
+            <span>Nível: <span id="current-level">1</span> (<span id="level-title">Novato</span>)</span>
             <span class="history-btn" id="history-btn"><i class="fas fa-history"></i> Histórico</span>
         </div>
 
         <div class="nav">
             <button class="nav-btn active" id="home-btn"><i class="fas fa-home"></i> Tarefas</button>
             <button class="nav-btn" id="rewards-btn"><i class="fas fa-gift"></i> Recompensas</button>
+            <button class="nav-btn" id="pending-btn"><i class="fas fa-clock"></i> Pendentes</button>
             <button class="nav-btn" id="level-btn"><i class="fas fa-level-up-alt"></i> Nível</button>
         </div>
 
@@ -64,6 +66,24 @@
                     </div>
                 </div>
                 <button id="claim-rewards-btn" class="claim-btn">Pegar Recompensas</button>
+            </div>
+        </div>
+
+        <!-- Modal Adicionar Tarefa Pendente -->
+        <div id="pending-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-pending-modal">&times;</span>
+                <h2>➕ Adicionar Tarefa Pendente</h2>
+                <div class="form-group">
+                    <input type="text" id="pending-task-name" placeholder="Nome da tarefa" class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="number" id="pending-task-xp" placeholder="XP (10-500)" min="10" max="500" class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="date" id="pending-task-date" class="form-input">
+                </div>
+                <button id="add-pending-btn" class="add-btn">Adicionar</button>
             </div>
         </div>
     </div>

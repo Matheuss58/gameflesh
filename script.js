@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const xpProgress = document.getElementById('xp-progress');
     const streakDaysElement = document.getElementById('streak-days');
     const currentLevelElement = document.getElementById('current-level');
+    const levelTitleElement = document.getElementById('level-title');
     const notification = document.getElementById('notification');
     const completeSound = document.getElementById('complete-sound');
     const rewardSound = document.getElementById('reward-sound');
@@ -14,8 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const rewardsBtn = document.getElementById('rewards-btn');
     const homeBtn = document.getElementById('home-btn');
     const levelBtn = document.getElementById('level-btn');
+    const pendingBtn = document.getElementById('pending-btn');
     const historyBtn = document.getElementById('history-btn');
     const resetTasksBtn = document.getElementById('reset-tasks-btn');
+    const resetLevelBtn = document.getElementById('reset-level-btn');
     const historyModal = document.getElementById('history-modal');
     const historyList = document.getElementById('history-list');
     const rewardModal = document.getElementById('reward-modal');
@@ -25,11 +28,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const claimRewardsBtn = document.getElementById('claim-rewards-btn');
     const closeModal = document.querySelector('.close-modal');
     const closeRewardModal = document.querySelector('.close-reward-modal');
+    const closePendingModal = document.querySelector('.close-pending-modal');
     const sectionTitle = document.getElementById('section-title');
+    const pendingModal = document.getElementById('pending-modal');
+    const addPendingBtn = document.getElementById('add-pending-btn');
+    const pendingTaskName = document.getElementById('pending-task-name');
+    const pendingTaskXp = document.getElementById('pending-task-xp');
+    const pendingTaskDate = document.getElementById('pending-task-date');
 
     // Configurações
-    const XP_LIMIT = 500;
+    const BASE_XP_LIMIT = 500;
     const REWARDS_PER_LEVEL = 2;
+    const LEVEL_TITLES = {
+        1: "Novato",
+        11: "Aprendiz",
+        21: "Iniciante",
+        31: "Intermediário",
+        41: "Avançado",
+        51: "Experiente",
+        61: "Profissional",
+        71: "Mestre",
+        81: "Grão-Mestre",
+        91: "Lendário",
+        101: "Épico",
+        151: "Mítico",
+        201: "Lendário",
+        301: "Divino",
+        501: "Supremo",
+        751: "Transcendente",
+        1001: "Gênioflesh"
+    };
 
     // Dados do usuário
     let userData = {
@@ -41,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
         rewards: [],
         availableRewards: [],
         history: {},
-        pendingRewards: []
+        pendingRewards: [],
+        pendingTasks: []
     };
 
     // Tarefas padrão
@@ -60,12 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: "Organizar o quarto", xp: 10, completed: false },
         { name: "Lavar roupa", xp: 15, completed: false },
         { name: "Escrever no diário", xp: 15, completed: false },
+        { name: "Banho em menos de 10 minutos", xp: 15, completed: false },
         { name: "Abrir WhatsApp só 4 vezes no dia", xp: 50, completed: false },
         { name: "Abrir Instagram só 3 vezes no dia", xp: 60, completed: false },
         { name: "Beber 1 garrafa de água", xp: 25, completed: false },
         { name: "Usar o celular menos de 2 horas no dia", xp: 30, completed: false },
         { name: "Treinar 30min de futebol", xp: 35, completed: false },
         { name: "Dormir antes das 22:30h", xp: 50, completed: false },
+        { name: "Rezar por 20 minutos", xp: 50, completed: false },
         { name: "Banho gelado", xp: 200, completed: false },
         { name: "Desafio Extra: Repetir uma tarefa de 40min ou mais", xp: 50, completed: false }
     ];
@@ -75,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Comer Nutella",
         "40 minutos de jogo",
         "Salgadinho",
-        "RProgramar 1 hora",
+        "Programar 1 hora",
         "Comer bastante",
         "Assistir 40min de YouTube",
         "Redes Sociais 30min permitidas",
@@ -86,7 +117,10 @@ document.addEventListener('DOMContentLoaded', function() {
         "1 episódio de série",
         "Anular uma tarefa hoje",
         "Filme",
-        "Programar 30 minhutos"
+        "Programar 30 minutos",
+        "Ganhar 15 XP",
+        "Ganhar 10 XP",
+        "Ganhar 5 XP",
     ];
 
     // ========== FUNÇÕES PRINCIPAIS ========== //
@@ -118,6 +152,18 @@ document.addEventListener('DOMContentLoaded', function() {
         saveUserData();
         updateUI();
         showNotification("Tarefas resetadas com sucesso!", "success");
+    }
+
+    function resetLevel() {
+        if (!confirm("Tem certeza que deseja resetar seu nível? Você voltará para o nível 1 com 0 XP.")) {
+            return;
+        }
+        
+        userData.level = 1;
+        userData.xp = 0;
+        saveUserData();
+        updateUI();
+        showNotification("Nível resetado com sucesso!", "success");
     }
 
     function checkDailyReset() {
@@ -162,9 +208,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 0);
     }
 
+    function getXpLimitForLevel(level) {
+        return BASE_XP_LIMIT + Math.floor(level / 10) * 50;
+    }
+
+    function getLevelTitle(level) {
+        const thresholds = Object.keys(LEVEL_TITLES).map(Number).sort((a, b) => b - a);
+        for (const threshold of thresholds) {
+            if (level >= threshold) {
+                return LEVEL_TITLES[threshold];
+            }
+        }
+        return "Iniciante";
+    }
+
     function checkLevelUp() {
-        if (userData.xp >= XP_LIMIT) {
-            userData.xp -= XP_LIMIT;
+        const xpLimit = getXpLimitForLevel(userData.level);
+        
+        if (userData.xp >= xpLimit) {
+            userData.xp -= xpLimit;
             userData.level++;
             
             const rewards = getRandomRewards(REWARDS_PER_LEVEL);
@@ -242,15 +304,78 @@ document.addEventListener('DOMContentLoaded', function() {
         navigateToRewards();
     }
 
+    function addPendingTask() {
+        const name = pendingTaskName.value.trim();
+        const xp = parseInt(pendingTaskXp.value);
+        const date = pendingTaskDate.value;
+        
+        if (!name || isNaN(xp) || !date) {
+            showNotification("Por favor, preencha todos os campos corretamente.", "error");
+            return;
+        }
+        
+        if (xp < 10 || xp > 500) {
+            showNotification("O XP deve estar entre 10 e 500.", "error");
+            return;
+        }
+        
+        const newTask = {
+            name,
+            xp,
+            date,
+            completed: false
+        };
+        
+        userData.pendingTasks.push(newTask);
+        saveUserData();
+        
+        pendingTaskName.value = "";
+        pendingTaskXp.value = "";
+        pendingTaskDate.value = "";
+        
+        pendingModal.style.display = "none";
+        showNotification("Tarefa pendente adicionada com sucesso!", "success");
+        
+        if (pendingBtn.classList.contains('active')) {
+            navigateToPending();
+        }
+    }
+
+    function movePendingToToday(index) {
+        const task = userData.pendingTasks[index];
+        userData.tasks.push({
+            name: task.name,
+            xp: task.xp,
+            completed: false
+        });
+        
+        userData.pendingTasks.splice(index, 1);
+        saveUserData();
+        showNotification("Tarefa movida para hoje!", "success");
+        updateUI();
+    }
+
+    function deletePendingTask(index) {
+        if (confirm("Tem certeza que deseja remover esta tarefa pendente?")) {
+            userData.pendingTasks.splice(index, 1);
+            saveUserData();
+            showNotification("Tarefa pendente removida.", "success");
+            updateUI();
+        }
+    }
+
     // ========== INTERFACE DO USUÁRIO ========== //
 
     function updateUI() {
+        const xpLimit = getXpLimitForLevel(userData.level);
+        
         currentXpElement.textContent = userData.xp;
-        maxXpElement.textContent = XP_LIMIT;
+        maxXpElement.textContent = xpLimit;
         streakDaysElement.textContent = userData.streak;
         currentLevelElement.textContent = userData.level;
+        levelTitleElement.textContent = getLevelTitle(userData.level);
         
-        const xpPercentage = Math.min((userData.xp / XP_LIMIT) * 100, 100);
+        const xpPercentage = Math.min((userData.xp / xpLimit) * 100, 100);
         xpProgress.style.width = `${xpPercentage}%`;
         
         tasksList.innerHTML = '';
@@ -259,6 +384,8 @@ document.addEventListener('DOMContentLoaded', function() {
             navigateToRewards();
         } else if (levelBtn.classList.contains('active')) {
             navigateToLevel();
+        } else if (pendingBtn.classList.contains('active')) {
+            navigateToPending();
         } else {
             navigateToHome();
         }
@@ -270,9 +397,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const taskElement = document.createElement('div');
             taskElement.className = `task ${task.completed ? 'completed' : ''}`;
             taskElement.innerHTML = `
+                <div class="task-checkbox-container">
+                    <div class="task-checkbox">${task.completed ? '✓' : ''}</div>
+                </div>
                 <span class="task-text">${task.name}</span>
                 <span class="xp">+${task.xp}</span>
             `;
+            
             taskElement.addEventListener('click', () => toggleTask(index));
             tasksList.appendChild(taskElement);
         });
@@ -306,9 +437,74 @@ document.addEventListener('DOMContentLoaded', function() {
         tasksList.appendChild(container);
     }
 
+    function showPendingList() {
+        sectionTitle.textContent = "⏰ Tarefas Pendentes";
+        const container = document.createElement('div');
+        container.className = 'list';
+        
+        if (userData.pendingTasks.length === 0) {
+            const emptyMsg = document.createElement('p');
+            emptyMsg.textContent = 'Nenhuma tarefa pendente. Adicione tarefas para concluir em uma data futura!';
+            emptyMsg.style.textAlign = 'center';
+            emptyMsg.style.padding = '20px';
+            emptyMsg.style.color = '#666';
+            container.appendChild(emptyMsg);
+        } else {
+            userData.pendingTasks.forEach((task, index) => {
+                const taskElement = document.createElement('div');
+                taskElement.className = 'pending-task';
+                
+                const dueDate = task.date ? new Date(task.date).toLocaleDateString('pt-BR') : "Sem data";
+                
+                taskElement.innerHTML = `
+                    <div>
+                        <div class="task-text">${task.name}</div>
+                        <div class="due-date">⏳ ${dueDate}</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="xp">+${task.xp}</span>
+                        <button class="move-today-btn" data-index="${index}">Hoje</button>
+                        <button class="delete-pending-btn" data-index="${index}">🗑️</button>
+                    </div>
+                `;
+                
+                container.appendChild(taskElement);
+            });
+        }
+        
+        // Adiciona botão para adicionar nova tarefa pendente
+        const addButton = document.createElement('button');
+        addButton.className = 'add-pending-btn';
+        addButton.innerHTML = '<i class="fas fa-plus"></i> Adicionar Tarefa Pendente';
+        addButton.addEventListener('click', () => {
+            pendingModal.style.display = 'block';
+        });
+        
+        container.appendChild(addButton);
+        tasksList.appendChild(container);
+        
+        // Adiciona event listeners aos botões dinamicamente
+        document.querySelectorAll('.move-today-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const index = parseInt(btn.getAttribute('data-index'));
+                movePendingToToday(index);
+            });
+        });
+        
+        document.querySelectorAll('.delete-pending-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const index = parseInt(btn.getAttribute('data-index'));
+                deletePendingTask(index);
+            });
+        });
+    }
+
     function showLevelInfo() {
         sectionTitle.textContent = "📊 Progresso";
-        const xpToNextLevel = XP_LIMIT - userData.xp;
+        const xpLimit = getXpLimitForLevel(userData.level);
+        const xpToNextLevel = xpLimit - userData.xp;
         
         const container = document.createElement('div');
         container.className = 'level-info';
@@ -316,11 +512,11 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = `
             <div class="level-stat">
                 <span class="stat-label">Nível atual:</span>
-                <span class="stat-value">${userData.level}</span>
+                <span class="stat-value">${userData.level} (${getLevelTitle(userData.level)})</span>
             </div>
             <div class="level-stat">
                 <span class="stat-label">XP atual:</span>
-                <span class="stat-value">${userData.xp}/${XP_LIMIT}</span>
+                <span class="stat-value">${userData.xp}/${xpLimit}</span>
             </div>
             <div class="level-stat">
                 <span class="stat-label">Faltam para próximo nível:</span>
@@ -330,9 +526,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="stat-label">Sequência atual:</span>
                 <span class="stat-value">${userData.streak} dias</span>
             </div>
+            <div class="level-stat">
+                <span class="stat-label">Próximo título:</span>
+                <span class="stat-value">${getNextLevelTitle()}</span>
+            </div>
         `;
         
         tasksList.appendChild(container);
+    }
+
+    function getNextLevelTitle() {
+        const currentLevel = userData.level;
+        const thresholds = Object.keys(LEVEL_TITLES).map(Number).sort((a, b) => a - b);
+        
+        for (const threshold of thresholds) {
+            if (threshold > currentLevel) {
+                return `Nível ${threshold} (${LEVEL_TITLES[threshold]})`;
+            }
+        }
+        
+        return "Nenhum (você alcançou o nível máximo!)";
     }
 
     function showHistory() {
@@ -412,6 +625,7 @@ document.addEventListener('DOMContentLoaded', function() {
         homeBtn.classList.add('active');
         rewardsBtn.classList.remove('active');
         levelBtn.classList.remove('active');
+        pendingBtn.classList.remove('active');
         showTasksList();
     }
 
@@ -419,6 +633,7 @@ document.addEventListener('DOMContentLoaded', function() {
         homeBtn.classList.remove('active');
         rewardsBtn.classList.add('active');
         levelBtn.classList.remove('active');
+        pendingBtn.classList.remove('active');
         showRewardsList();
     }
 
@@ -426,7 +641,16 @@ document.addEventListener('DOMContentLoaded', function() {
         homeBtn.classList.remove('active');
         rewardsBtn.classList.remove('active');
         levelBtn.classList.add('active');
+        pendingBtn.classList.remove('active');
         showLevelInfo();
+    }
+
+    function navigateToPending() {
+        homeBtn.classList.remove('active');
+        rewardsBtn.classList.remove('active');
+        levelBtn.classList.remove('active');
+        pendingBtn.classList.add('active');
+        showPendingList();
     }
 
     // ========== EVENT LISTENERS ========== //
@@ -434,9 +658,12 @@ document.addEventListener('DOMContentLoaded', function() {
     rewardsBtn.addEventListener('click', navigateToRewards);
     homeBtn.addEventListener('click', navigateToHome);
     levelBtn.addEventListener('click', navigateToLevel);
+    pendingBtn.addEventListener('click', navigateToPending);
     historyBtn.addEventListener('click', showHistory);
     resetTasksBtn.addEventListener('click', resetTasks);
+    resetLevelBtn.addEventListener('click', resetLevel);
     claimRewardsBtn.addEventListener('click', claimRewards);
+    addPendingBtn.addEventListener('click', addPendingTask);
     
     closeModal.addEventListener('click', () => {
         historyModal.style.display = 'none';
@@ -446,6 +673,10 @@ document.addEventListener('DOMContentLoaded', function() {
         rewardModal.style.display = 'none';
     });
     
+    closePendingModal.addEventListener('click', () => {
+        pendingModal.style.display = 'none';
+    });
+    
     window.addEventListener('click', (e) => {
         if (e.target === historyModal) {
             historyModal.style.display = 'none';
@@ -453,7 +684,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === rewardModal) {
             rewardModal.style.display = 'none';
         }
+        if (e.target === pendingModal) {
+            pendingModal.style.display = 'none';
+        }
     });
+
+    // Configurar data mínima para o datepicker (hoje)
+    pendingTaskDate.min = new Date().toISOString().split('T')[0];
 
     // Inicializar
     loadUserData();

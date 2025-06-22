@@ -98,7 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: "Dormir antes das 22:30h", xp: 50, completed: false },
         { name: "Rezar por 20 minutos", xp: 50, completed: false },
         { name: "Banho gelado", xp: 200, completed: false },
-        { name: "Desafio Extra: Repetir uma tarefa de 40min ou mais", xp: 50, completed: false }
+        { name: "Desafio Extra: Repetir uma tarefa de 40min ou mais", xp: 50, completed: false },
+        { name: "Not", xp: 200, completed: false },
     ];
 
     // Recompensas disponíveis

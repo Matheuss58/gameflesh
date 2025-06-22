@@ -125,23 +125,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== FUNÇÕES PRINCIPAIS ========== //
 
-    function loadUserData() {
-        const savedData = localStorage.getItem('lifeGamificationData');
-        if (savedData) {
-            userData = JSON.parse(savedData);
-            checkDailyReset();
-        } else {
-            resetTasks();
-            userData.availableRewards = [...defaultAvailableRewards];
-            saveUserData();
-        }
+function loadUserData() {
+    const savedData = localStorage.getItem('lifeGamificationData');
+    if (savedData) {
+        userData = JSON.parse(savedData);
+        checkDailyReset();
         
-        if (userData.pendingRewards.length > 0) {
-            setTimeout(() => showRewardModal(userData.pendingRewards), 1000);
+        // Sincronizar nível com o perfil
+        const profileData = localStorage.getItem('lifeGamificationProfile');
+        if (profileData) {
+            const profile = JSON.parse(profileData);
+            if (profile.level !== userData.level) {
+                profile.level = userData.level;
+                localStorage.setItem('lifeGamificationProfile', JSON.stringify(profile));
+            }
         }
-        
-        updateUI();
+    } else {
+        resetTasks();
+        userData.availableRewards = [...defaultAvailableRewards];
+        saveUserData();
     }
+    
+    if (userData.pendingRewards.length > 0) {
+        setTimeout(() => showRewardModal(userData.pendingRewards), 1000);
+    }
+    
+    updateUI();
+}
 
     function saveUserData() {
         localStorage.setItem('lifeGamificationData', JSON.stringify(userData));
@@ -691,6 +701,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Configurar data mínima para o datepicker (hoje)
     pendingTaskDate.min = new Date().toISOString().split('T')[0];
+
+    const profileBtn = document.getElementById('profile-btn');
+
+profileBtn.addEventListener('click', () => {
+    window.location.href = "profile.html";
+});
 
     // Inicializar
     loadUserData();

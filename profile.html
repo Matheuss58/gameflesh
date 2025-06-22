@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Life Gamification</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <h1>Meu Perfil</h1>
+            <button class="back-btn" id="back-btn"><i class="fas fa-arrow-left"></i> Voltar</button>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-display" id="profile-bg">
+                <div class="avatar-container">
+                    <div class="avatar" id="avatar">
+                        <div class="face">
+                            <div class="eyes" id="eyes">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                            </div>
+                        </div>
+                        <div class="hat" id="hat"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <h2 id="profile-name">Gamificador</h2>
+                <div class="level-badge">
+                    <span>Nível <span id="profile-level">1</span></span>
+                    <span id="profile-title">Novato</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h2><i class="fas fa-tools"></i> Administração</h2>
+            <div class="admin-buttons">
+                <button id="unlock-all-btn" class="admin-btn unlock-btn">
+                    <i class="fas fa-lock-open"></i> Desbloquear Tudo
+                </button>
+                <button id="reset-all-btn" class="admin-btn reset-btn">
+                    <i class="fas fa-undo"></i> Resetar Tudo
+                </button>
+            </div>
+        </div>
+
+        <div class="customization-section">
+            <h2><i class="fas fa-paint-brush"></i> Personalização</h2>
+            
+            <div class="customization-tabs">
+                <button class="tab-btn active" data-tab="skin">Pele</button>
+                <button class="tab-btn" data-tab="hats">Chapéus</button>
+                <button class="tab-btn" data-tab="eyes">Olhos</button>
+                <button class="tab-btn" data-tab="backgrounds">Cenários</button>
+            </div>
+
+            <div class="customization-content">
+                <div class="tab-content active" id="skin-tab">
+                    <div class="items-grid" id="skin-items"></div>
+                </div>
+                <div class="tab-content" id="hats-tab">
+                    <div class="items-grid" id="hats-items"></div>
+                </div>
+                <div class="tab-content" id="eyes-tab">
+                    <div class="items-grid" id="eyes-items"></div>
+                </div>
+                <div class="tab-content" id="backgrounds-tab">
+                    <div class="items-grid" id="backgrounds-items"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievements-section">
+            <h2><i class="fas fa-trophy"></i> Conquistas</h2>
+            <div class="achievements-grid" id="achievements-grid"></div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn" id="profile-home-btn"><i class="fas fa-home"></i> Tarefas</button>
+            <button class="nav-btn" id="profile-rewards-btn"><i class="fas fa-gift"></i> Recompensas</button>
+            <button class="nav-btn active" id="profile-profile-btn"><i class="fas fa-user"></i> Perfil</button>
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>

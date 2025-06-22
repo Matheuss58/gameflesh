@@ -480,17 +480,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    profileHomeBtn.addEventListener('click', () => {
-        window.location.href = "index.html";
-    });
-    
-    profileRewardsBtn.addEventListener('click', () => {
-        window.location.href = "index.html#rewards";
-    });
-    
-    profileProfileBtn.addEventListener('click', () => {
-        window.location.href = "profile.html";
-    });
+profileHomeBtn.addEventListener('click', () => {
+    window.location.href = "index.html";
+});
+
+profileRewardsBtn.addEventListener('click', () => {
+    window.location.href = "index.html#rewards";
+});
+
+profileProfileBtn.addEventListener('click', () => {
+    // Já está na página de perfil
+});
 
     unlockAllBtn.addEventListener('click', unlockAllItems);
     resetAllBtn.addEventListener('click', resetAllItems);

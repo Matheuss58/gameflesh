@@ -702,7 +702,7 @@ function loadUserData() {
     // Configurar data mínima para o datepicker (hoje)
     pendingTaskDate.min = new Date().toISOString().split('T')[0];
 
-    const profileBtn = document.getElementById('profile-btn');
+const profileBtn = document.getElementById('profile-btn');
 
 profileBtn.addEventListener('click', () => {
     window.location.href = "profile.html";

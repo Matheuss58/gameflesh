@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gameflesh-cache-v4';
+const CACHE_NAME = 'gameflesh-cache-v30';
 const urlsToCache = [
   './',
   './index.html',

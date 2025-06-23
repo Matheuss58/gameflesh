@@ -58,98 +58,347 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: "marble", name: "Pele Mármore", level: 200, color: "linear-gradient(45deg, #e0e0e0, #c0c0c0, #e0e0e0)" },
             { id: "diamond", name: "Pele Diamante", level: 250, color: "linear-gradient(45deg, #b9f2ff, #ffffff, #b9f2ff)" }
         ],
-        hats: [
-            { 
-                id: "none", 
-                name: "Sem Chapéu", 
-                level: 1, 
-                style: "display: none;" 
-            },
-            { 
-                id: "baseball", 
-                name: "Boné de Baseball", 
-                level: 5, 
-                style: "width: 80%; height: 15px; background: #5e72e4; border-radius: 15px 15px 0 0; border-bottom: 5px solid #4a5bd6; &::after { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 60%; height: 10px; background: #5e72e4; border-radius: 0 0 10px 10px; }" 
-            },
-            { 
-                id: "tophat", 
-                name: "Cartola", 
-                level: 10, 
-                style: "width: 60%; height: 25px; background: #2d3748; border-radius: 5px 5px 0 0; &::before { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80%; height: 10px; background: #2d3748; border-radius: 0 0 5px 5px; }" 
-            },
-            { 
-                id: "cowboy", 
-                name: "Chapéu de Cowboy", 
-                level: 15, 
-                style: "width: 100%; height: 10px; background: #a0522d; border-radius: 50%; &::before { content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); width: 120%; height: 15px; background: #a0522d; border-radius: 50%; }" 
-            },
-            { 
-                id: "beanie", 
-                name: "Gorro de Inverno", 
-                level: 20, 
-                style: "width: 80%; height: 30px; background: #f56565; border-radius: 50% 50% 0 0; clip-path: ellipse(50% 60% at 50% 40%); &::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 60%; height: 15px; background: #f56565; border-radius: 0 0 10px 10px; }" 
-            },
-            { 
-                id: "crown", 
-                name: "Coroa Real", 
-                level: 30, 
-                style: "width: 70%; height: 20px; background: gold; clip-path: polygon(0% 0%, 10% 60%, 30% 100%, 50% 80%, 70% 100%, 90% 60%, 100% 0%); box-shadow: 0 0 10px gold;" 
-            },
-            { 
-                id: "wizard", 
-                name: "Chapéu de Mago", 
-                level: 50, 
-                style: "width: 60%; height: 40px; background: #9f7aea; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); &::before { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 80%; height: 10px; background: #9f7aea; border-radius: 5px; }" 
-            },
-            { 
-                id: "halo", 
-                name: "Auréola", 
-                level: 100, 
-                style: "width: 80%; height: 5px; background: gold; border-radius: 50%; box-shadow: 0 0 15px gold;" 
-            },
-            { 
-                id: "pirate", 
-                name: "Chapéu de Pirata", 
-                level: 25, 
-                style: "width: 80%; height: 15px; background: #2d3748; border-radius: 10px 10px 0 0; &::before { content: ''; position: absolute; top: 15px; left: 30%; width: 40%; height: 20px; background: #2d3748; clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%); }" 
-            },
-            { 
-                id: "chef", 
-                name: "Chapéu de Chef", 
-                level: 35, 
-                style: "width: 80%; height: 25px; background: white; border-radius: 5px; &::before { content: ''; position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 60%; height: 15px; background: white; border-radius: 0 0 10px 10px; }" 
-            },
-            { 
-                id: "viking", 
-                name: "Chapéu Viking", 
-                level: 40, 
-                style: "width: 80%; height: 20px; background: #a0522d; border-radius: 10px; &::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 100%; height: 15px; background: #a0522d; clip-path: polygon(0% 0%, 25% 100%, 75% 100%, 100% 0%); }" 
-            },
-            { 
-                id: "santa", 
-                name: "Chapéu de Natal", 
-                level: 45, 
-                style: "width: 70%; height: 30px; background: #f56565; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); &::before { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 100%; height: 15px; background: white; border-radius: 5px; }" 
-            },
-            { 
-                id: "grad", 
-                name: "Chapéu de Formatura", 
-                level: 60, 
-                style: "width: 80%; height: 10px; background: #2d3748; border-radius: 5px; &::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100%; height: 5px; background: #5e72e4; }" 
-            },
-            { 
-                id: "witch", 
-                name: "Chapéu de Bruxa", 
-                level: 75, 
-                style: "width: 60%; height: 50px; background: #2d3748; clip-path: polygon(0% 0%, 100% 0%, 50% 100%); border-radius: 5px 5px 0 0;" 
-            },
-            { 
-                id: "afro", 
-                name: "Afro", 
-                level: 20, 
-                style: "width: 100%; height: 40px; background: #000; border-radius: 50%; box-shadow: 0 0 0 5px #333;" 
+    hats: [
+    { 
+        id: "none", 
+        name: "Sem Chapéu", 
+        level: 1, 
+        style: "display: none;" 
+    },
+    { 
+        id: "beanie", 
+        name: "Gorro de Lã", 
+        level: 5, 
+        style: `
+            width: 100%;
+            height: 25px;
+            background: #f56565;
+            border-radius: 50% 50% 0 0;
+            top: -20px;
+            transform: translateX(-50%) scaleY(0.7);
+            border-bottom: 8px solid #e53e3e;
+        `
+    },
+    { 
+        id: "baseball", 
+        name: "Boné Esportivo", 
+        level: 8, 
+        style: `
+            width: 90%;
+            height: 15px;
+            background: #5e72e4;
+            border-radius: 15px 15px 0 0;
+            top: -15px;
+            border-bottom: 10px solid #4a5bd6;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: 8px;
+                background: #5e72e4;
+                border-radius: 0 0 8px 8px;
             }
-        ],
+        `
+    },
+    { 
+        id: "bucket", 
+        name: "Chapéu de Balde", 
+        level: 12, 
+        style: `
+            width: 110%;
+            height: 20px;
+            background: #ecc94b;
+            border-radius: 5px;
+            top: -18px;
+            transform: translateX(-50%) rotateX(10deg);
+            &::before {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 120%;
+                height: 15px;
+                background: #d69e2e;
+                border-radius: 0 0 10px 10px;
+            }
+        `
+    },
+    { 
+        id: "cowboy", 
+        name: "Chapéu de Cowboy", 
+        level: 15, 
+        style: `
+            width: 140%;
+            height: 8px;
+            background: #a0522d;
+            border-radius: 50%;
+            top: -12px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 160%;
+                height: 12px;
+                background: #a0522d;
+                border-radius: 50%;
+            }
+        `
+    },
+    { 
+        id: "newsboy", 
+        name: "Chapéu de Jornaleiro", 
+        level: 18, 
+        style: `
+            width: 95%;
+            height: 20px;
+            background: #2d3748;
+            border-radius: 10px 10px 0 0;
+            top: -18px;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                height: 8px;
+                background: #2d3748;
+                border-radius: 0 0 8px 8px;
+            }
+        `
+    },
+    { 
+        id: "pirate", 
+        name: "Chapéu de Pirata", 
+        level: 22, 
+        style: `
+            width: 90%;
+            height: 15px;
+            background: #2d3748;
+            border-radius: 10px 10px 0 0;
+            top: -15px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 15px;
+                left: 30%;
+                width: 50%;
+                height: 20px;
+                background: #2d3748;
+                clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+            }
+        `
+    },
+    { 
+        id: "tophat", 
+        name: "Cartola Elegante", 
+        level: 25, 
+        style: `
+            width: 70%;
+            height: 25px;
+            background: #2d3748;
+            border-radius: 5px 5px 0 0;
+            top: -25px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                height: 10px;
+                background: #2d3748;
+                border-radius: 0 0 5px 5px;
+            }
+        `
+    },
+    { 
+        id: "chef", 
+        name: "Chapéu de Chef", 
+        level: 28, 
+        style: `
+            width: 90%;
+            height: 25px;
+            background: white;
+            border-radius: 5px;
+            top: -25px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: 12px;
+                background: white;
+                border-radius: 0 0 10px 10px;
+            }
+        `
+    },
+    { 
+        id: "viking", 
+        name: "Elmo Viking", 
+        level: 32, 
+        style: `
+            width: 90%;
+            height: 20px;
+            background: #a0522d;
+            border-radius: 10px;
+            top: -20px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 120%;
+                height: 15px;
+                background: #a0522d;
+                clip-path: polygon(0% 0%, 25% 100%, 75% 100%, 100% 0%);
+            }
+        `
+    },
+    { 
+        id: "crown", 
+        name: "Coroa Real", 
+        level: 35, 
+        style: `
+            width: 80%;
+            height: 20px;
+            background: gold;
+            clip-path: polygon(0% 0%, 10% 60%, 30% 100%, 50% 80%, 70% 100%, 90% 60%, 100% 0%);
+            box-shadow: 0 0 10px gold;
+            top: -20px;
+        `
+    },
+    { 
+        id: "wizard", 
+        name: "Chapéu de Mago", 
+        level: 40, 
+        style: `
+            width: 70%;
+            height: 45px;
+            background: #9f7aea;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            top: -45px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 45px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                height: 10px;
+                background: #9f7aea;
+                border-radius: 5px;
+            }
+        `
+    },
+    { 
+        id: "witch", 
+        name: "Chapéu de Bruxa", 
+        level: 45, 
+        style: `
+            width: 65%;
+            height: 55px;
+            background: #2d3748;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+            border-radius: 5px 5px 0 0;
+            top: -55px;
+        `
+    },
+    { 
+        id: "grad", 
+        name: "Chapéu de Formatura", 
+        level: 50, 
+        style: `
+            width: 90%;
+            height: 12px;
+            background: #2d3748;
+            border-radius: 5px;
+            top: -12px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 120%;
+                height: 6px;
+                background: #5e72e4;
+            }
+        `
+    },
+    { 
+        id: "halo", 
+        name: "Auréola Divina", 
+        level: 60, 
+        style: `
+            width: 90%;
+            height: 6px;
+            background: gold;
+            border-radius: 50%;
+            box-shadow: 0 0 20px gold;
+            top: -25px;
+        `
+    },
+    { 
+        id: "samurai", 
+        name: "Elmo Samurai", 
+        level: 70, 
+        style: `
+            width: 85%;
+            height: 30px;
+            background: #2d3748;
+            clip-path: polygon(0% 0%, 100% 0%, 85% 50%, 100% 100%, 0% 100%, 15% 50%);
+            top: -30px;
+        `
+    },
+    { 
+        id: "cyber", 
+        name: "Capacete Cyber", 
+        level: 80, 
+        style: `
+            width: 95%;
+            height: 35px;
+            background: linear-gradient(135deg, #4a5568, #2d3748);
+            border-radius: 20px 20px 0 0;
+            top: -35px;
+            box-shadow: 0 0 15px rgba(94, 114, 228, 0.7);
+        `
+    },
+    { 
+        id: "dragon", 
+        name: "Elmo de Dragão", 
+        level: 90, 
+        style: `
+            width: 90%;
+            height: 40px;
+            background: #c53030;
+            clip-path: polygon(0% 20%, 20% 0%, 35% 15%, 50% 0%, 65% 15%, 80% 0%, 100% 20%, 85% 40%, 100% 60%, 80% 80%, 65% 65%, 50% 80%, 35% 65%, 20% 80%, 0% 60%, 15% 40%);
+            top: -40px;
+        `
+    },
+    { 
+        id: "cosmic", 
+        name: "Coroa Cósmica", 
+        level: 100, 
+        style: `
+            width: 85%;
+            height: 25px;
+            background: linear-gradient(90deg, #9f7aea, #667eea);
+            clip-path: polygon(0% 0%, 15% 60%, 30% 0%, 45% 60%, 60% 0%, 75% 60%, 100% 0%, 85% 100%, 60% 40%, 40% 100%, 15% 40%);
+            box-shadow: 0 0 25px rgba(159, 122, 234, 0.8);
+            top: -25px;
+        `
+    }
+],
         eyes: [
             { id: "black", name: "Olhos Pretos", level: 1, color: "#000000" },
             { id: "blue", name: "Olhos Azuis", level: 5, color: "#5e72e4" },
@@ -612,3 +861,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar
     loadProfileData();
 });
+
+function applyHatStyle(hatId) {
+    const hat = document.getElementById('hat');
+    const hatData = achievementsDB.hats.find(h => h.id === hatId);
+    
+    hat.style.cssText = '';
+    hat.innerHTML = '';
+    
+    if (hatData && hatData.id !== "none") {
+        // Aplicar estilo base
+        const baseStyle = hatData.style.split('&')[0].trim();
+        hat.style.cssText = baseStyle;
+        
+        // Processar pseudo-elementos
+        if (hatData.style.includes('::before')) {
+            const beforeStyle = hatData.style.split('&::before')[1]
+                               .split('}')[0].trim() + '}';
+            const beforeEl = document.createElement('div');
+            beforeEl.className = 'hat-before';
+            beforeEl.style.cssText = beforeStyle;
+            hat.appendChild(beforeEl);
+        }
+        
+        if (hatData.style.includes('::after')) {
+            const afterStyle = hatData.style.split('&::after')[1]
+                              .split('}')[0].trim() + '}';
+            const afterEl = document.createElement('div');
+            afterEl.className = 'hat-after';
+            afterEl.style.cssText = afterStyle;
+            hat.appendChild(afterEl);
+        }
+    }
+}

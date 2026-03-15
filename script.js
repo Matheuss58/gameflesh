@@ -75,27 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Tarefas padrão
     const defaultTasks = [
-        { name: "Arrumar a cama", xp: 10, completed: false },
-        { name: "Chegar cedo para a Faculdade", xp: 15, completed: false },
-        { name: "Ir para o curso", xp: 10, completed: false },
-        { name: "Alongar 5 minutos", xp: 25, completed: false },
-        { name: "Não usar o celular de manhã", xp: 10, completed: false },
-        { name: "30 min lendo", xp: 30, completed: false },
-        { name: "10 min de estudo sobre o curso", xp: 10, completed: false },
-        { name: "Lição de casa", xp: 15, completed: false },
-        { name: "Lavar louça", xp: 25, completed: false },
-        { name: "Organizar o quarto", xp: 10, completed: false },
-        { name: "Lavar roupa", xp: 15, completed: false },
-        { name: "Escrever", xp: 15, completed: false },
-        { name: "Banho em menos de 10 minutos", xp: 15, completed: false },
-        { name: "Abrir WhatsApp só 4 vezes no dia", xp: 50, completed: false },
-        { name: "Abrir Instagram só 3 vezes no dia", xp: 60, completed: false },
-        { name: "Beber 1 garrafa de água", xp: 25, completed: false },
-        { name: "Usar o celular menos de 2 horas no dia", xp: 30, completed: false },
-        { name: "Treinar 30 min de futebol", xp: 35, completed: false },
-        { name: "Dormir antes das 22:30h", xp: 50, completed: false },
-        { name: "Rezar por 20 minutos", xp: 50, completed: false },
-        { name: "Desafio Extra: Repetir uma tarefa", xp: 50, completed: false },
+        { name: "DESENHO TÉCNICO I", xp: 100, completed: false },
+        { name: "INTRODUÇÃO À ELETROQUÍMICA", xp: 100, completed: false },
+        { name: "INTRODUÇÃO À EXTENSÃO EM ENGENHARIA ELÉTRICA", xp: 100, completed: false },
+        { name: "INTRODUÇÃO À GEOMETRIA ANALÍTICA E ÁLGEBRA LINEAR", xp: 100, completed: false },
+        { name: "METODOLOGIA DE PESQUISA PARA ENGENHEIROS ELETRICISTAS", xp: 100, completed: false },
+        { name: "PROGRAMAÇÃO DE COMPUTADORES", xp: 100, completed: false },
+        { name: "PRÉ-CÁLCULO", xp: 100, completed: false }
     ];
 
     // Recompensas disponíveis
